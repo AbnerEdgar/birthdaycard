@@ -501,7 +501,7 @@
 
   // ── Floaters ──
   const fl = document.getElementById('floaters');
-  const fe = ['🎉','🌸','✨','🍀','💛','🎊','🌷','⭐'];
+  const fe = []; //['🎉','🌸','✨','🍀','💛','🎊','🌷','⭐'];
   for (let i=0;i<8;i++) {
     const f=document.createElement('div'); f.className='floater';
     f.textContent=fe[Math.floor(Math.random()*fe.length)];
