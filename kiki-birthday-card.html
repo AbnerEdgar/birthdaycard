@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 24th Birthday, Kiki! 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #8FAF8C;
+    --blush: #E8C5B0;
+    --cream: #FDF6EE;
+    --dusty-rose: #C9897A;
+    --deep: #3D2B2B;
+    --gold: #C9A96E;
+    --mist: #D4E4D2;
+  }
+
+  body {
+    background: var(--cream);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Animated background petals / bokeh */
+  .bg-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .petal {
+    position: absolute;
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: floatPetal linear infinite;
+  }
+
+  @keyframes floatPetal {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Card */
+  .card {
+    position: relative;
+    z-index: 10;
+    width: min(520px, 94vw);
+    background: linear-gradient(160deg, #fffaf4 0%, #fdf0e8 50%, #f5efe6 100%);
+    border-radius: 4px;
+    padding: 56px 52px 48px;
+    box-shadow:
+      0 2px 4px rgba(61,43,43,0.04),
+      0 8px 24px rgba(61,43,43,0.08),
+      0 32px 80px rgba(61,43,43,0.1),
+      inset 0 0 0 1px rgba(201,169,110,0.2);
+    animation: cardReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+
+  @keyframes cardReveal {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Corner ornaments */
+  .card::before, .card::after {
+    content: '';
+    position: absolute;
+    width: 60px; height: 60px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.5;
+  }
+  .card::before { top: 16px; left: 16px; border-width: 1px 0 0 1px; }
+  .card::after  { bottom: 16px; right: 16px; border-width: 0 1px 1px 0; }
+
+  /* Top ornament line */
+  .ornament-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+  .ornament-top .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+  .ornament-top .line:last-child { background: linear-gradient(to left, transparent, var(--gold)); }
+  .ornament-top .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+
+  /* Age badge */
+  .age-badge {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dusty-rose);
+    background: rgba(201,137,122,0.08);
+    border: 1px solid rgba(201,137,122,0.25);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s 0.5s both;
+  }
+
+  /* Main name */
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 10vw, 62px);
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1.05;
+    margin-bottom: 4px;
+    animation: fadeUp 0.8s 0.6s both;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--dusty-rose);
+  }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 36px;
+    animation: fadeUp 0.8s 0.7s both;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.8s both;
+  }
+  .divider .rule { flex: 1; height: 1px; background: rgba(143,175,140,0.4); }
+  .divider .clover { font-size: 18px; }
+
+  /* Message body */
+  .message {
+    font-size: 17px;
+    line-height: 1.85;
+    color: #5a4040;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.9s both;
+  }
+  .message p + p { margin-top: 14px; }
+  .message .highlight {
+    color: var(--dusty-rose);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Bottom ornament */
+  .ornament-bottom {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.8s 1s both;
+  }
+  .ornament-bottom .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent); }
+
+  /* Floating emojis */
+  .floaters {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .floater {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(0) scale(0.8); }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.6; }
+    100% { opacity: 0; transform: translateY(-160px) scale(1.1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Confetti burst on load */
+  .confetti-piece {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: confettiFall linear forwards;
+    z-index: 5;
+  }
+  @keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(-20px) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background petals -->
+<div class="bg-canvas" id="bgCanvas"></div>
+
+<div class="card">
+  <div class="floaters" id="floaters"></div>
+
+  <div class="ornament-top">
+    <div class="line"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="age-badge">24th Birthday</div>
+
+  <h1>Happy<br>Birthday,<br><em>Kiki!</em></h1>
+  <div class="subtitle">— with love & good wishes —</div>
+
+  <div class="divider">
+    <div class="rule"></div>
+    <span class="clover">🍀</span>
+    <div class="rule"></div>
+  </div>
+
+  <div class="message">
+    <p>Wishing you <span class="highlight">happiness, good health,</span> and lots of good luck this year.</p>
+    <p>May the world be a little <span class="highlight">gentler</span> with you, and may many good opportunities open up for you. 🎉</p>
+    <p>And don't be too hard on yourself. <span class="highlight">You are more than enough.</span></p>
+  </div>
+
+  <div class="ornament-bottom">
+    <div class="line"></div>
+    <span style="font-size:13px; letter-spacing:0.2em; color:var(--gold); font-family:'Playfair Display',serif;">✦ 2025 ✦</span>
+    <div class="line"></div>
+  </div>
+</div>
+
+<script>
+  // Background petals
+  const bgCanvas = document.getElementById('bgCanvas');
+  const petalColors = ['#e8c5b0','#d4e4d2','#c9897a','#c9a96e','#8faf8c','#f5ddd3'];
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 8 + Math.random() * 18;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${petalColors[Math.floor(Math.random()*petalColors.length)]};
+      animation-duration:${10 + Math.random()*14}s;
+      animation-delay:${Math.random()*12}s;
+      opacity:0;
+    `;
+    bgCanvas.appendChild(p);
+  }
+
+  // Floaters inside card
+  const floaters = document.getElementById('floaters');
+  const floatEmojis = ['🎉','🌸','✨','🍀','💛','🎊','🌷','⭐'];
+  for (let i = 0; i < 10; i++) {
+    const f = document.createElement('div');
+    f.className = 'floater';
+    f.textContent = floatEmojis[Math.floor(Math.random()*floatEmojis.length)];
+    f.style.cssText = `
+      left:${5+Math.random()*90}%;
+      bottom:${-5}%;
+      animation-duration:${4+Math.random()*5}s;
+      animation-delay:${1.5+Math.random()*8}s;
+    `;
+    floaters.appendChild(f);
+  }
+
+  // Confetti burst
+  const confettiColors = ['#E8C5B0','#8FAF8C','#C9897A','#C9A96E','#D4E4D2','#3D2B2B'];
+  setTimeout(() => {
+    for (let i = 0; i < 60; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left:${20+Math.random()*60}%;
+        top:0;
+        background:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};
+        width:${5+Math.random()*8}px;
+        height:${5+Math.random()*8}px;
+        border-radius:${Math.random()>0.5?'50%':'2px'};
+        animation-duration:${2+Math.random()*2.5}s;
+        animation-delay:${Math.random()*0.8}s;
+      `;
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 4500);
+    }
+  }, 800);
+</script>
+</body>
+</html>
